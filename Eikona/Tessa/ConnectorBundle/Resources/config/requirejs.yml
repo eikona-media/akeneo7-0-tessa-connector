@@ -1,0 +1,30 @@
+config:
+    paths:
+        eikona/tessa/connector/eikona-mam-field:                    eikonatessaconnector/js/product/field/mam-field
+        eikona/tessa/connector/templates/product/field/mam:         eikonatessaconnector/templates/product/field/mam.html
+        eikona/tessa/connector/templates/asset-selection/form:      eikonatessaconnector/templates/mam-asset-selection/form.html
+        eikona/tessa/connector/mam-asset-selection-form:            eikonatessaconnector/js/mam-asset-selection/form
+        eikona/tessa/connector/system/configuration:                eikonatessaconnector/js/form/system
+        eikona/tessa/connector/template/system/group/configuration: eikonatessaconnector/js/templates/system/group/configuration.html
+        eikona/tessa/connector/attributes/product-info:             eikonatessaconnector/js/product/form/attributes/product-info
+        pim/media-url-generator:                                    eikonatessaconnector/js/generator/media-url-generator
+        pim/media-url-generator-base:                               pimui/js/generator/media-url-generator
+        eikona/tessa/fetcher/attribute:                             eikonatessaconnector/js/fetcher/attribute-fetcher
+
+        # Wenn man eigene Attribute im Datagrid rendern möchte, müssen diese als "oro/datagrid/<attribute>-cell" registriert werden
+        # Der Name kommt aus der Datagrid Attribut-Typ Definition (siehe config/datagrid/attribute_types.yml) und wird dort ohne "-cell" angegeben
+        oro/datagrid/eikona-catalog-tessa-cell:                     eikonatessaconnector/js/datagrid/cell/eikona-catalog-tessa-cell
+        eikona/tessa/connector/datagrid/cell/template:              eikonatessaconnector/templates/datagrid/cell/template.html
+
+        pim/product-edit-form/main-image:   eikonatessaconnector/js/product/form/main-image.ts
+
+        eikona/tessa/form/common/fields/select-tags:                 eikonatessaconnector/js/form/common/fields/select-tags.js
+        eikona/tessa/form/common/fields/select-tags/template:        eikonatessaconnector/templates/form/common/fields/select-tags.html
+
+    config:
+        pim/attribute-edit-form/type-specific-form-registry:
+            formNames:
+                eikona_catalog_tessa:
+                    create: pim-attribute-form-tessa
+                    edit:   pim-attribute-form-tessa
+

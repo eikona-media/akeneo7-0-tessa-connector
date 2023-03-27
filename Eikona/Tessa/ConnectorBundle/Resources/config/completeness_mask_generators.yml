@@ -1,0 +1,13 @@
+services:
+    eikona.tessa.completeness.mask_item_generator.default:
+        class: Eikona\Tessa\ConnectorBundle\Product\Completeness\MaskItemGenerator\TessaMaskItemGenerator
+        tags: [{ name: akeneo.pim.enrichment.completeness.mask_item_generator }]
+
+    eikona.tessa.get_required_attributes_masks:
+        class: Akeneo\Pim\Structure\Bundle\Query\InternalApi\Family\DefaultSqlGetRequiredAttributesMasks
+        arguments:
+            - '@database_connection'
+            -
+                - 'eikona_catalog_tessa'
+        tags:
+            - { name: akeneo.pim.structure.query.get_required_attributes_masks_per_attribute_type }

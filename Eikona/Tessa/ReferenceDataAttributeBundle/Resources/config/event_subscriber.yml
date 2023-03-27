@@ -1,0 +1,11 @@
+services:
+  # Overwrite original service
+  akeneo_referenceentity.application.attribute.subscribers.set_default_attributes_on_reference_entity_creation_subscriber:
+    class: Eikona\Tessa\ReferenceDataAttributeBundle\back\Application\Attribute\Subscribers\SetDefaultAttributesOnReferenceEntityCreationSubscriber
+    arguments:
+      - '@akeneo_referenceentity.infrastructure.persistence.repository.reference_entity'
+      - '@akeneo_referenceentity.infrastructure.persistence.repository.attribute'
+      - '@akeneo_referenceentity.application.attribute.create_attribute_handler'
+      - '@eikona.tessa'
+    tags:
+      - { name: kernel.event_subscriber }

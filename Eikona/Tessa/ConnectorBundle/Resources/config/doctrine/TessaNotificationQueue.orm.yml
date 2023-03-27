@@ -1,0 +1,28 @@
+Eikona\Tessa\ConnectorBundle\Entity\TessaNotificationQueue:
+  type: entity
+  table: eikona_media_tessa_notification_queue
+  changeTrackingPolicy: DEFERRED_EXPLICIT
+  repositoryClass: Eikona\Tessa\ConnectorBundle\ConfigurationExtension\Doctrine\ORM\Repository\TessaNotificationRepository
+  id:
+    uuid:
+      type: string
+      length: 36
+      unique: true
+
+  fields:
+    type:
+      type: string
+      length: 100
+    code:
+      type: string
+      length: 100
+    action:
+      type: string
+      length: 100
+      nullable: false
+
+    created:
+      type: datetime
+      gedmo:
+        timestampable:
+          on: create

@@ -1,0 +1,63 @@
+pim_enrich.entity.attribute.property.type.eikona_catalog_tessa: 'TESSA CONNECT'
+
+tessa:
+  asset management:
+    title: TESSA Asset Management
+    confirm: Save
+    cancel: Cancel
+    asset: Asset
+    assets: Assets
+    choose: Manage assets
+    choosen: selected
+    remove: Remove
+    mark_removable: Mark for removal
+    unmark_removable: Undo removal
+  configuration:
+    base_url:
+      label: API URL
+      description: Url to the TESSA api
+    ui_url:
+      label: TESSA URL
+      description: Url to the TESSA application
+    usehttpinternally:
+      label: HTTP for internal communication
+      description: Use HTTP for internal communication between Akeneo and Tessa
+    username:
+      label: User name
+      description: TESSA username for the api access
+    apikey:
+      label: API Key
+      description: TESSA api key for the api access
+    systemidentifier:
+      label: TESSA System Identifier
+      description: TESSA system identifier
+    syncactive:
+      label: Activate synchronisation
+      description: Syncronize informations with TESSA
+    syncinbackground:
+      label: Sync in background
+      description: Syncronize informations with TESSA in chunks in background
+    userusedbytessa:
+      label: User name for Akeneo-API
+      description: Akeneo user, which is used by TESSA for access to the Akeneo-API
+    disableasseteditinginakeneoui:
+      label: Disable asset editing in Akeneo UI
+      description: Disables the editing of assets in the Akeneo UI. Assets can only be edited via the asset dialog.
+    enablereferenceentitytessamainimage:
+      label: Enable Tessa assets as mainimage for reference entities
+      description: Enables the creation of a Tessa asset attribute for new reference entities (Enterprise Edition) instead of an Akeneo asset attribute.
+    tab:
+      label: TESSA
+    link:
+      label: EIKONA Akeneo TESSA Connector
+    version: Version
+  attribute:
+      max_assets:
+          label: Max assets
+      tessa_export_url:
+          label: Export Url
+      max_displayed_assets:
+          label: Max displayed assets in grid view
+  datagrid:
+    cell:
+      assets: "{{ count }} asset|{{ count }} assets"
