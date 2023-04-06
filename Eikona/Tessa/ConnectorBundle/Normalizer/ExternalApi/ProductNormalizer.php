@@ -68,7 +68,7 @@ class ProductNormalizer extends \Akeneo\Pim\Enrichment\Component\Product\Normali
     /**
      * {@inheritdoc}
      */
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null): bool
     {
         if ($this->request === null) {
             return false;
