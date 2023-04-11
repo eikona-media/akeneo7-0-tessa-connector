@@ -17,3 +17,11 @@ services:
     public: true
     arguments:
       - '@doctrine.orm.entity_manager'
+
+  eikona.tessa.controller.internal_api:
+    class: Eikona\Tessa\ConnectorBundle\Controller\InternalApiController
+    public: true
+    arguments:
+      - '@oro_config.global'
+      - '@eikona.tessa'
+      - '@oro_security.security_facade'

@@ -5,3 +5,12 @@ tessa:
       Sorry, but your TESSA cannot be reached!
 
       Please try again later.
+
+eikona:
+  tessa:
+
+    # ACL
+    acl:
+      group: Tessa Connector
+      info: View Information
+      settings: Edit Settings

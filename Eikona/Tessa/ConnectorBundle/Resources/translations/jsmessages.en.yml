@@ -1,5 +1,56 @@
 pim_enrich.entity.attribute.property.type.eikona_catalog_tessa: 'TESSA CONNECT'
+pim_title.eikona_tessa_connector: Tessa Connector
+pim_title.eikona_tessa_connector_info: Tessa Connector - Information
+pim_title.eikona_tessa_connector_settings: Tessa Connector - Settings
 
+eikona:
+  tessa:
+
+    # Navigation
+    menu:
+      tessa: Tessa Connector
+      info: Information
+      settings: Settings
+
+    # Info page
+    info:
+      name: EIKONA Akeneo TESSA Connector
+      version: Version
+      gotoTessaButtonLabel: Go to Tessa
+
+    # Settings page
+    settings:
+      sections:
+        connection: Verbindung
+        settings: Einstellungen
+      fields:
+        baseUrl:
+          label: API URL
+          description: Url to the TESSA api
+        uiUrl:
+          label: TESSA URL
+          description: Url to the TESSA application
+        useHttpInternally:
+          label: HTTP for internal communication
+          description: Use HTTP for internal communication between Akeneo and Tessa
+        userName:
+          label: User name
+          description: TESSA username for the api access
+        apiKey:
+          label: API Key
+          description: TESSA api key for the api access
+        systemIdentifier:
+          label: TESSA System Identifier
+          description: TESSA system identifier
+        disableAssetEditingInAkeneoUi:
+          label: Disable asset editing in Akeneo UI
+          description: Disables the editing of assets in the Akeneo UI. Assets can only be edited via the asset dialog.
+        enableReferenceEntityTessaMainImage:
+          label: Enable Tessa assets as mainimage for reference entities
+          description: Enables the creation of a Tessa asset attribute for new reference entities (Enterprise Edition) instead of an Akeneo asset attribute.
+      messages:
+        saveSuccessful: Settings successfully updated
+        saveFailed: The settings could not be updated
 tessa:
   asset management:
     title: TESSA Asset Management
@@ -12,45 +63,6 @@ tessa:
     remove: Remove
     mark_removable: Mark for removal
     unmark_removable: Undo removal
-  configuration:
-    base_url:
-      label: API URL
-      description: Url to the TESSA api
-    ui_url:
-      label: TESSA URL
-      description: Url to the TESSA application
-    usehttpinternally:
-      label: HTTP for internal communication
-      description: Use HTTP for internal communication between Akeneo and Tessa
-    username:
-      label: User name
-      description: TESSA username for the api access
-    apikey:
-      label: API Key
-      description: TESSA api key for the api access
-    systemidentifier:
-      label: TESSA System Identifier
-      description: TESSA system identifier
-    syncactive:
-      label: Activate synchronisation
-      description: Syncronize informations with TESSA
-    syncinbackground:
-      label: Sync in background
-      description: Syncronize informations with TESSA in chunks in background
-    userusedbytessa:
-      label: User name for Akeneo-API
-      description: Akeneo user, which is used by TESSA for access to the Akeneo-API
-    disableasseteditinginakeneoui:
-      label: Disable asset editing in Akeneo UI
-      description: Disables the editing of assets in the Akeneo UI. Assets can only be edited via the asset dialog.
-    enablereferenceentitytessamainimage:
-      label: Enable Tessa assets as mainimage for reference entities
-      description: Enables the creation of a Tessa asset attribute for new reference entities (Enterprise Edition) instead of an Akeneo asset attribute.
-    tab:
-      label: TESSA
-    link:
-      label: EIKONA Akeneo TESSA Connector
-    version: Version
   attribute:
       max_assets:
           label: Max assets

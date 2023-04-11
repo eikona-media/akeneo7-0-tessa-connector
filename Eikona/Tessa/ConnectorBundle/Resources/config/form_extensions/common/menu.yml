@@ -1,0 +1,45 @@
+extensions:
+  pim-menu-tessa:
+    module: pim/menu/tab
+    parent: pim-menu
+    position: 51
+    targetZone: mainMenu
+    config:
+      title: eikona.tessa.menu.tessa
+
+  pim-menu-tessa-column:
+    module: pim/menu/column
+    parent: pim-menu
+    position: 500
+    targetZone: column
+    config:
+      stateCode: pim-menu-tessa
+      tab: pim-menu-tessa
+      navigationTitle: eikona.tessa.menu.tessa
+      collapsedModifier: AknColumn--firstColumn
+
+  pim-menu-tessa-navigation-block:
+    module: pim/menu/navigation-block
+    parent: pim-menu-tessa-column
+    targetZone: navigation
+    config:
+      title: eikona.tessa.menu.tessa
+
+  pim-menu-tessa-info:
+    module: pim/menu/item
+    parent: pim-menu-tessa-navigation-block
+    position: 100
+    aclResourceId: eikona_tessa_connector_info
+    config:
+      title: eikona.tessa.menu.info
+      to: eikona_tessa_connector_info
+
+  pim-menu-tessa-settings:
+    module: pim/menu/item
+    parent: pim-menu-tessa-navigation-block
+    position: 110
+    aclResourceId: eikona_tessa_connector_settings
+    config:
+      title: eikona.tessa.menu.settings
+      to: eikona_tessa_connector_settings
+

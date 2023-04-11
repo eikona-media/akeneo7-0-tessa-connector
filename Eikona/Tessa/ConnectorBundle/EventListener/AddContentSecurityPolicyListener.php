@@ -38,7 +38,7 @@ class AddContentSecurityPolicyListener implements EventSubscriberInterface
     public function addCspHeaders(ResponseEvent $event): void
     {
         $url = $this->tessa->getBaseUrl();
-        if (empty($url) || ($parsedUrl = parse_url($url)) === false) {
+        if (empty($url) || ($parsedUrl = parse_url($url)) === false || @empty($parsedUrl['host'])) {
             return;
         }
 

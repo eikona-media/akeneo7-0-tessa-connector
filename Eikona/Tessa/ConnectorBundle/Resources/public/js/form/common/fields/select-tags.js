@@ -41,7 +41,6 @@ define([
      * {@inheritdoc}
      */
     postRender: function () {
-      console.log('render');
       this.$('input.tessa-select2-tags').select2({
         tags: this.config.choices,
         tokenSeparators: [",", " "],

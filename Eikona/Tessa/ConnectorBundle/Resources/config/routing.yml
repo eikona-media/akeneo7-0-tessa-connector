@@ -1,9 +1,21 @@
 tessa_media:
     resource: 'Routing/media.yml'
     prefix: /tessa/media
+
 tessa:
     resource: 'Routing/tessa.yml'
     prefix: /tessa
+
 tessa_api:
   resource: 'Routing/api.yml'
   prefix: /api/rest/v1/tessa
+
+internal_api:
+  resource: 'Routing/internal_api.yml'
+  prefix: /tessa-connector-api
+
+eikona_tessa_connector_info:
+  path: /tessa-connector/info
+
+eikona_tessa_connector_settings:
+  path: /tessa-connector/settings

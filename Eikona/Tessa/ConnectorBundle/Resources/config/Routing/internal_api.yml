@@ -1,0 +1,14 @@
+eikona_tessa_internal_api_connector_infos:
+    path: /info
+    defaults: { _controller: eikona.tessa.controller.internal_api:infoAction }
+    methods: [ GET ]
+
+eikona_tessa_internal_api_get_settings:
+    path: /settings
+    defaults: { _controller: eikona.tessa.controller.internal_api:getSettingsAction }
+    methods: [ GET ]
+
+eikona_tessa_internal_api_save_settings:
+    path: /settings
+    defaults: { _controller: eikona.tessa.controller.internal_api:saveSettingsAction }
+    methods: [ POST ]
