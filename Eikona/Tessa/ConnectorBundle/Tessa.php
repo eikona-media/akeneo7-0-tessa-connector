@@ -2,7 +2,6 @@
 
 namespace Eikona\Tessa\ConnectorBundle;
 
-use Eikona\Tessa\ConnectorBundle\Normalizer\NotificationNormalizer\NotificationNormalizer;
 use Exception;
 use Monolog\Logger;
 use Oro\Bundle\ConfigBundle\Config\ConfigManager;
@@ -11,26 +10,6 @@ use Symfony\Component\HttpKernel\KernelInterface;
 
 class Tessa
 {
-    public const TYPE_CATEGORY = 'category';
-    public const TYPE_CHANNEL = 'channel';
-    public const TYPE_PRODUCT = 'product';
-    public const TYPE_PRODUCT_MODEL = 'product_model';
-    public const TYPE_GROUP = 'group';
-    public const TYPE_ENTITY = 'entity';
-    public const TYPE_ENTITY_RECORD = 'entity_record';
-
-    public const RESOURCE_NAME_CATEGORY = 'Category';
-    public const RESOURCE_NAME_CHANNEL = 'Channel';
-    public const RESOURCE_NAME_PRODUCT = 'Product';
-    public const RESOURCE_NAME_PRODUCT_MODEL = 'ProductModel';
-    public const RESOURCE_NAME_GROUP = 'Group';
-    public const RESOURCE_NAME_ENTITY = 'Entity';
-    public const RESOURCE_NAME_ENTITY_RECORD = 'EntityRecord';
-
-    public const CONTEXT_UPDATE = 'Update';
-    public const CONTEXT_DELETE = 'Deletion';
-    public const CONTEXT_DELETE_ALL_RECORDS = 'DeletionAllRecords';
-
     /** @var string */
     protected $baseUrl;
 
@@ -59,25 +38,10 @@ class Tessa
     protected $userId;
 
     /** @var bool */
-    protected $syncActive;
-
-    /** @var bool */
-    protected $syncInBackground;
-
-    /** @var int */
-    protected $chunkSize;
-
-    /** @var string */
-    protected $userUsedByTessa;
-
-    /** @var bool */
     protected $isAssetEditingInAkeneoUiDisabled;
 
     /** @var bool */
     protected $isReferenceEntityTessaMainImageEnabled;
-
-    /** @var NotificationNormalizer */
-    protected $notificationNormalizer;
 
     /**
      * Tessa constructor.
@@ -85,13 +49,11 @@ class Tessa
      * @param ConfigManager $oroGlobal
      * @param Kernel|KernelInterface $kernel
      * @param Logger $logger
-     * @param NotificationNormalizer $notificationNormalizer
      */
     public function __construct(
         ConfigManager $oroGlobal,
         KernelInterface $kernel,
         Logger $logger,
-        NotificationNormalizer $notificationNormalizer
     )
     {
         try {
@@ -102,10 +64,6 @@ class Tessa
             $this->accessToken = trim($oroGlobal->get('pim_eikona_tessa_connector.api_key'));
             $this->userId = (int)substr($this->accessToken, 0, strpos($this->accessToken, ':'));
             $this->systemIdentifier = trim($oroGlobal->get('pim_eikona_tessa_connector.system_identifier'));
-            $this->syncActive = (bool)$oroGlobal->get('pim_eikona_tessa_connector.sync_active');
-            $this->syncInBackground = (bool)$oroGlobal->get('pim_eikona_tessa_connector.sync_in_background');
-            $this->chunkSize = (int)$oroGlobal->get('pim_eikona_tessa_connector.chunk_size');
-            $this->userUsedByTessa = trim($oroGlobal->get('pim_eikona_tessa_connector.user_used_by_tessa'));
             $this->isAssetEditingInAkeneoUiDisabled = (bool)$oroGlobal->get('pim_eikona_tessa_connector.disable_asset_editing_in_akeneo_ui');
             $this->isReferenceEntityTessaMainImageEnabled = (bool)$oroGlobal->get('pim_eikona_tessa_connector.enable_reference_entity_tessa_main_image');
         } catch(Exception $e) {
@@ -117,16 +75,11 @@ class Tessa
             $this->accessToken = '';
             $this->userId = 0;
             $this->systemIdentifier = '';
-            $this->syncActive = false;
-            $this->syncInBackground = false;
-            $this->chunkSize = 100;
-            $this->userUsedByTessa = '';
             $this->isAssetEditingInAkeneoUiDisabled = false;
             $this->isReferenceEntityTessaMainImageEnabled = false;
         }
         $this->kernel = $kernel;
         $this->logger = $logger;
-        $this->notificationNormalizer = $notificationNormalizer;
     }
 
     /**
@@ -143,14 +96,6 @@ class Tessa
     public function getUiUrl()
     {
         return $this->uiUrl;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isUseHttpInternally(): bool
-    {
-        return $this->useHttpInternally;
     }
 
     /**
@@ -183,38 +128,6 @@ class Tessa
     public function getSystemIdentifier()
     {
         return $this->systemIdentifier;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isSyncActive()
-    {
-        return $this->syncActive;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isBackgroundSyncActive()
-    {
-        return $this->syncInBackground;
-    }
-
-    /**
-     * @return int
-     */
-    public function getChunkSize(): int
-    {
-        return $this->chunkSize;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUserUsedByTessa()
-    {
-        return $this->userUsedByTessa;
     }
 
     /**
@@ -255,83 +168,6 @@ class Tessa
         curl_close($ch);
 
         return $httpcode < 400;
-    }
-
-    /**
-     * @param $entity
-     */
-    public function notifySingleModification($entity)
-    {
-        $this->sendNotificationToTessa($this->notificationNormalizer->normalizeModification($entity));
-    }
-
-    /**
-     * @param array $entities
-     */
-    public function notifyBulkModification(array $entities)
-    {
-        $normalizedEntities = array_map(function ($entity) {
-            return $this->notificationNormalizer->normalizeModification($entity);
-        }, $entities);
-
-        $chunks = array_chunk($normalizedEntities, $this->getChunkSize());
-        foreach ($chunks as $chunk) {
-            $this->sendNotificationToTessa($chunk, true);
-        }
-    }
-
-    /**
-     * @param int|string $id
-     * @param string $identifier
-     * @param string $type
-     */
-    public function notifySingleDeletion($id, string $identifier, string $type)
-    {
-        $this->sendNotificationToTessa($this->notificationNormalizer->normalizeDeletion($type, $id, $identifier));
-    }
-
-    /**
-     * @param array $payload
-     * @param bool $isBulk
-     */
-    public function sendNotificationToTessa(array $payload, $isBulk = false)
-    {
-        $baseUrl = $this->getUrlForInternalCommunication();
-        if (empty($baseUrl)) {
-            return;
-        }
-
-        $payload = json_encode($payload);
-
-        $url = $baseUrl . '/dienste/akeneo/warteschlange.php';
-        if ($isBulk) {
-            $url .= '?bulk=1';
-        }
-
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_HEADER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'Content-Type: application/json',
-            'Tessa-Api-Token: ' . $this->getAccessToken(),
-        ]);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, $this->kernel->isDebug() ? 30 : 0);
-        $result = curl_exec($ch);
-
-        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-        if ($httpcode !== 200) {
-            $this->logger->error(sprintf(
-                'Tessa request failed (http code %d): %s',
-                $httpcode,
-                $result
-            ));
-        }
-
-        curl_close($ch);
     }
 
     public function getAsset(string $assetId)

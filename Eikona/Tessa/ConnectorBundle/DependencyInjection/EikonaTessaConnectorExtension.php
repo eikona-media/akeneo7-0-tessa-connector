@@ -25,10 +25,8 @@ class EikonaTessaConnectorExtension extends Extension
     public function load(array $configs, ContainerBuilder $container)
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-        $loader->load('commands.yml');
         $loader->load('controllers.yml');
         $loader->load('services.yml');
-        $loader->load('event_listener.yml');
         $loader->load('converters.yml');
         $loader->load('formatters.yml');
         $loader->load('attribute_types.yml');
@@ -37,7 +35,6 @@ class EikonaTessaConnectorExtension extends Extension
         $loader->load('factories.yml');
         $loader->load('validators.yml');
         $loader->load('normalizers.yml');
-        $loader->load('notification_normalizers.yml');
         $loader->load('query_builders.yml');
         $loader->load('datagrid/attribute_types.yml');
         $loader->load('datagrid/filters.yml');

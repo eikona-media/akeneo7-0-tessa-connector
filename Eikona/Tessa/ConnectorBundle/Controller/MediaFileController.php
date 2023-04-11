@@ -13,7 +13,6 @@ use Akeneo\Pim\Enrichment\Component\Product\Repository\ProductRepositoryInterfac
 use Akeneo\UserManagement\Component\Model\User;
 use Eikona\Tessa\ConnectorBundle\Security\AuthGuard;
 use Eikona\Tessa\ConnectorBundle\Tessa;
-use Eikona\Tessa\ConnectorBundle\Utilities\IdPrefixer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,8 +31,6 @@ class MediaFileController extends AbstractController
     protected $productRepository;
     /** @var ProductModelRepositoryInterface */
     protected $productModelRepository;
-    /** @var IdPrefixer */
-    protected $idPrefixer;
     /** @var TokenStorageInterface */
     protected $tokenStorage;
 
@@ -42,7 +39,6 @@ class MediaFileController extends AbstractController
         AuthGuard $authGuard,
         ProductRepositoryInterface $productRepository,
         ProductModelRepositoryInterface $productModelRepository,
-        IdPrefixer $idPrefixer,
         TokenStorageInterface $tokenStorage
     )
     {
@@ -50,7 +46,6 @@ class MediaFileController extends AbstractController
         $this->authGuard = $authGuard;
         $this->productRepository = $productRepository;
         $this->productModelRepository = $productModelRepository;
-        $this->idPrefixer = $idPrefixer;
         $this->tokenStorage = $tokenStorage;
     }
 

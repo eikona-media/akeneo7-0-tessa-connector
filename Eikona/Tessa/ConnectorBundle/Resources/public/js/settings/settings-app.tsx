@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   NotificationLevel,
-  PageContent,
+  PageContent as PageContentWithoutMargin,
   PageHeader,
   PimView,
   UnsavedChanges,
@@ -74,6 +74,10 @@ const fieldConfig = [
     ]
   }
 ];
+
+const PageContent = styled(PageContentWithoutMargin)`
+  padding-bottom: 40px;
+`;
 
 const Section = styled.div`
   display: flex;

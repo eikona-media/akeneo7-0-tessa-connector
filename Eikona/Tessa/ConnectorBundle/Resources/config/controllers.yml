@@ -7,16 +7,9 @@ services:
       - '@eikona.tessa.auth_guard'
       - '@pim_catalog.repository.product'
       - '@pim_catalog.repository.product_model'
-      - '@eikona.utilities.id_prefixer'
       - '@security.token_storage'
     calls:
       - ['setContainer', ['@service_container' ]]
-
-  eikona.tessa.controller.api:
-    class: Eikona\Tessa\ConnectorBundle\Controller\ApiController
-    public: true
-    arguments:
-      - '@doctrine.orm.entity_manager'
 
   eikona.tessa.controller.internal_api:
     class: Eikona\Tessa\ConnectorBundle\Controller\InternalApiController

@@ -40,7 +40,6 @@ class InternalApiController
             $this->viewName('username') => $this->oroGlobal->get($this->modelName('username')),
             $this->viewName('api_key') => $this->oroGlobal->get($this->modelName('api_key')),
             $this->viewName('system_identifier') => $this->oroGlobal->get($this->modelName('system_identifier')),
-            $this->viewName('user_used_by_tessa') => $this->oroGlobal->get($this->modelName('user_used_by_tessa')),
             $this->viewName('disable_asset_editing_in_akeneo_ui') => (bool)$this->oroGlobal->get($this->modelName('disable_asset_editing_in_akeneo_ui')),
             $this->viewName('enable_reference_entity_tessa_main_image') => (bool)$this->oroGlobal->get($this->modelName('enable_reference_entity_tessa_main_image')),
         ]);

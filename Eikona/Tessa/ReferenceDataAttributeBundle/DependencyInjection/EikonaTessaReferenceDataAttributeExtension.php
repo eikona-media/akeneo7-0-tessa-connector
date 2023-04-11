@@ -25,10 +25,8 @@ class EikonaTessaReferenceDataAttributeExtension extends Extension
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('attribute.yml');
-        $loader->load('event_listener.yml');
         $loader->load('event_subscriber.yml');
         $loader->load('json_schema_validators.yml');
-        $loader->load('notification_normalizers.yml');
         $loader->load('persistence.yml');
         $loader->load('controllers.yml');
     }
