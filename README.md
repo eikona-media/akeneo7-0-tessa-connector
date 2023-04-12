@@ -66,25 +66,7 @@ yarn run less
 yarn run update-extensions
 ```
 
-6) Update your database schema
-
-```bash
-php bin/console doctrine:schema:update --dump-sql # Show changes
-php bin/console doctrine:schema:update --force # Update database schema
-```
-
-7) Configure the Tessa Connector in your Akeneo System Settings.
-
-8) (Optionally) Create a cronjob to synchronize data with TESSA in the background
-
-This is only necessary if you use the option "Sync in background" in the system settings
-
-```
-php bin/console eikona_media:tessa:notification_queue:execute --env=prod
-```
-
-Recommended to run every 5 minutes (`*/5 * * * *`). If the command is started twice at the same time, the second command exists with a notice.
-
+6) Configure the Tessa Connector in the Akeneo UI
 
 ## How to use with reference entities
 
