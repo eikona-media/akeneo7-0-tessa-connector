@@ -20,7 +20,7 @@ class AttributeTessaMaxDisplayedAssets
         if ($maxDisplayedAssets !== null) {
             Assert::numeric($maxDisplayedAssets, sprintf('Max assets must be numeric, %d given', $maxDisplayedAssets));
             $maxAssets = (int)$maxDisplayedAssets;
-            Assert::natural($maxDisplayedAssets, sprintf('Max assets cannot be negative, %d given', $maxDisplayedAssets));
+            Assert::natural($maxAssets, sprintf('Max assets cannot be negative, %d given', $maxAssets));
         }
         $this->maxDisplayedAssets = $maxDisplayedAssets;
     }

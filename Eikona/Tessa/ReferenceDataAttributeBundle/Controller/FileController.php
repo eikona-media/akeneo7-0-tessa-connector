@@ -2,12 +2,7 @@
 
 namespace Eikona\Tessa\ReferenceDataAttributeBundle\Controller;
 
-use Akeneo\Pim\Enrichment\Bundle\File\DefaultImageProviderInterface;
-use Akeneo\Pim\Enrichment\Bundle\File\FileTypeGuesserInterface;
-use Akeneo\Tool\Component\FileStorage\FilesystemProvider;
-use Akeneo\Tool\Component\FileStorage\Repository\FileInfoRepositoryInterface;
 use Eikona\Tessa\ConnectorBundle\Controller\MediaFileController;
-use Liip\ImagineBundle\Controller\ImagineController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 

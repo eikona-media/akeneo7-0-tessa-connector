@@ -66,7 +66,7 @@ class Tessa
             $this->systemIdentifier = trim($oroGlobal->get('pim_eikona_tessa_connector.system_identifier'));
             $this->isAssetEditingInAkeneoUiDisabled = (bool)$oroGlobal->get('pim_eikona_tessa_connector.disable_asset_editing_in_akeneo_ui');
             $this->isReferenceEntityTessaMainImageEnabled = (bool)$oroGlobal->get('pim_eikona_tessa_connector.enable_reference_entity_tessa_main_image');
-        } catch(Exception $e) {
+        } catch(Exception) {
             // This exception happens when the database is missing (first installation, so nothing to concern about)
             $this->baseUrl = '';
             $this->uiUrl = '';

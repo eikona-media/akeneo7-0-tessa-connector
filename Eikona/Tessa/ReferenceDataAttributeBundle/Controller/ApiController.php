@@ -7,9 +7,12 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-class ApiController extends \Eikona\Tessa\ConnectorBundle\Controller\ApiController
+class ApiController
 {
-
+    public function __construct(
+        protected EntityManager $entityManager
+    ) {
+    }
 
     /**
      * @return Response
@@ -33,15 +36,14 @@ class ApiController extends \Eikona\Tessa\ConnectorBundle\Controller\ApiControll
      */
     public function getSingleReferenceEntityRecordIds(string $refid)
     {
-
-        if ($refid===''){
-            return new Response('Empty ID given',404);
+        if ($refid === '') {
+            return new Response('Empty ID given', 404);
         }
 
         $sql = 'select identifier as refid from `akeneo_reference_entity_reference_entity` where identifier = :identifier';
-        $res = $this->executeSql($sql,array('identifier'=>$refid));
+        $res = $this->executeSql($sql, array('identifier' => $refid));
         if (count($res) === 0) {
-            return new Response('Unknown ID given',404);
+            return new Response('Unknown ID given', 404);
         }
 
         return new JsonResponse($this->getReferenceEntityRecords(array(array('refid' => $refid))));
@@ -70,4 +72,35 @@ class ApiController extends \Eikona\Tessa\ConnectorBundle\Controller\ApiControll
         return $data;
     }
 
+    /**
+     * @param string $sql
+     * @param array $data
+     * @return array
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    protected function executeSql(string $sql, array $data = array(), $idToInt = true): array
+    {
+        $conn = $this->entityManager->getConnection();
+        $stmt = $conn->prepare($sql);
+        $stmt->execute($data);
+        if ($idToInt === true) {
+            return ($this->idToInt($stmt->fetchAll()));
+        }
+        return ($stmt->fetchAll());
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    protected function idToInt(array $data): array
+    {
+        $anz = count($data);
+        for ($i = 0; $i < $anz; $i++) {
+            if (isset($data[$i]['id']) && is_numeric($data[$i]['id'])) {
+                $data[$i]['id'] = (int)$data[$i]['id'];
+            }
+        }
+        return $data;
+    }
 }

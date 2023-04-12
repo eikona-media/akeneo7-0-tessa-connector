@@ -51,7 +51,15 @@ class InternalApiController
     {
         $this->denyAccessUnlessAclIsGranted('eikona_tessa_connector_settings');
 
-        $this->oroGlobal->save(json_decode($request->getContent(), true));
+        $settings = json_decode($request->getContent(), true);
+        $settings = array_map(fn($setting) => [
+            'value' => $setting,
+            'scope' => $this->oroGlobal->getScopedEntityName(),
+            'use_parent_scope_value' => false,
+        ], $settings);
+
+
+        $this->oroGlobal->save($settings);
         return $this->getSettingsAction();
     }
 
