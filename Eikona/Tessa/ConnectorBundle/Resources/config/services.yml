@@ -39,3 +39,7 @@ services:
             - '@eikona.tessa'
         tags:
             - { name: kernel.event_subscriber, priority: -1 }
+
+    Eikona\Tessa\ConnectorBundle\Product\Domain\UserIntent\Factory\Value\TessaValueUserIntentFactory:
+        tags:
+            - { name: 'pim.enrichment.product.value_user_intent_factory' }
