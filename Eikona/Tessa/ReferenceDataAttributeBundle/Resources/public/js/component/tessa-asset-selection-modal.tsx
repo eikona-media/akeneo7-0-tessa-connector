@@ -33,15 +33,6 @@ export default class TessaAssetSelectionModal extends React.Component<Props> {
   componentDidMount() {
     window.addEventListener('message', this.onReceiveMessageBound);
 
-    // Iframe communication
-    const iframe = this.iframe.current as HTMLIFrameElement;
-    const iframeContent = iframe.contentWindow as Window;
-    iframe.addEventListener('load', () => {
-      iframeContent.postMessage(JSON.stringify({
-        'selected': this.props.selectedAssetIds,
-      }), '*');
-    });
-
     // Loading Mask
     const modalBody = this.modalBody.current as HTMLDivElement;
     const loadingMask = new LoadingMask();
@@ -72,7 +63,6 @@ export default class TessaAssetSelectionModal extends React.Component<Props> {
 
   getTessaUrl(): string {
     const data = {
-      ProductId: this.props.identifier,
       attribute: JSON.stringify({
         code: this.props.attribute.code.normalize(),
         type: this.props.attribute.type,

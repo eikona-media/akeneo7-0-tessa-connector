@@ -70,13 +70,7 @@ yarn run update-extensions
 
 ## How to use with reference entities
 
-1) Add the following lines **at the end** of your config/routes/routes.yml :
-```yaml
-tessa_api_reference_data:
-  resource: "@EikonaTessaReferenceDataAttributeBundle/Resources/config/routing.yml"
-```
-
-2) Enable the ReferenceDataAttributeBundle in the `config/bundles.php` file:
+1) Enable the ReferenceDataAttributeBundle in the `config/bundles.php` file:
 ```php
 return [
     // ...
@@ -84,4 +78,4 @@ return [
 ];
 ```
 
-3) Select TESSA in the type dropdown when you add a new reference entity attribute
+2) Select TESSA in the type dropdown when you add a new reference entity attribute

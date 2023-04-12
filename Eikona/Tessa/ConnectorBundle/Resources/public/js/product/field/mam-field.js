@@ -131,7 +131,6 @@ define(
               .render();
 
             this.modalBox.$el.find('iframe')
-              .on('load', this.onIframeReady.bind(this))
               .prop('src', this.getUrl());
 
             this.modalBox.on('hidden', () => {
@@ -182,49 +181,12 @@ define(
       },
 
       /**
-       * Wird gerufen, wenn die iFrame für den Tessa-Dialog
-       * bereit ist. Sendet die aktuellen Assets an den Dialog.
-       *
-       * @param e
-       */
-      onIframeReady (e) {
-        const iframe = e.target;
-        const iframeContent = iframe.contentWindow;
-
-        if (!iframe.src) {
-          return;
-        }
-
-        const currentValue = this.getCurrentValue();
-        if (currentValue.data) {
-          iframeContent.postMessage(JSON.stringify({
-            'selected': this.getCurrentValue()
-              .data
-              .split(',')
-          }), '*');
-        } else {
-          iframeContent.postMessage(JSON.stringify({}), '*');
-        }
-      },
-
-      /**
        * Erzeugt die URL für den Tessa-Dialog
        *
        * @returns {string}
        */
       getUrl () {
-        let prefix = 'P-';
-        if (this.productAttributes.model_type === 'product_model') {
-          prefix = 'PM-';
-        }
-
-        const identifier = (this.productAttributes.model_type === 'product_model')
-          ? this.context.entity.code
-          : this.context.entity.identifier;
-
         const data = {
-          ProductId: prefix + this.productAttributes.id,
-          identifier,
           attribute: JSON.stringify({
             code: this.attribute.code,
             type: this.attribute.type,

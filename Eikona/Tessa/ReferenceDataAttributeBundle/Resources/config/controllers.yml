@@ -1,10 +1,4 @@
 services:
-  eikona.tessa.controller.apireferencedata:
-    class: Eikona\Tessa\ReferenceDataAttributeBundle\Controller\ApiController
-    public: true
-    arguments:
-      - '@doctrine.orm.entity_manager'
-
   # Decorate original
   eikona.tessa.controller.file:
     public: true
