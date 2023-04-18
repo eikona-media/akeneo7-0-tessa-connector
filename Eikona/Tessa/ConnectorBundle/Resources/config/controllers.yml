@@ -1,0 +1,20 @@
+services:
+  eikona.tessa.controller.media:
+    class: Eikona\Tessa\ConnectorBundle\Controller\MediaFileController
+    public: true
+    arguments:
+      - '@eikona.tessa'
+      - '@eikona.tessa.auth_guard'
+      - '@pim_catalog.repository.product'
+      - '@pim_catalog.repository.product_model'
+      - '@security.token_storage'
+    calls:
+      - ['setContainer', ['@service_container' ]]
+
+  eikona.tessa.controller.internal_api:
+    class: Eikona\Tessa\ConnectorBundle\Controller\InternalApiController
+    public: true
+    arguments:
+      - '@oro_config.global'
+      - '@eikona.tessa'
+      - '@oro_security.security_facade'

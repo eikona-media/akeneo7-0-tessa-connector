@@ -1,0 +1,9 @@
+services:
+  # Decorate original
+  eikona.tessa.controller.file:
+    public: true
+    class: Eikona\Tessa\ReferenceDataAttributeBundle\Controller\FileController
+    decorates: pim_enrich.controller.file
+    arguments:
+      - '@.inner'
+      - '@eikona.tessa.controller.media'

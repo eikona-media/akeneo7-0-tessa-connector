@@ -1,0 +1,65 @@
+pim_enrich.entity.attribute.property.type.eikona_catalog_tessa: 'TESSA CONNECT'
+pim_title.eikona_tessa_connector: Tessa Connecteur
+pim_title.eikona_tessa_connector_info: Tessa Connector - Information
+pim_title.eikona_tessa_connector_settings: Tessa Connector - Paramètres
+
+eikona:
+  tessa:
+
+    # Navigation
+    menu:
+      tessa: Tessa Connecteur
+      info: Information
+      settings: Paramètres
+
+    # Info page
+    info:
+      name: EIKONA Akeneo TESSA Connector
+      version: Version
+      gotoTessaButtonLabel: Aller à Tessa
+
+    # Settings page
+    settings:
+      sections:
+        connection: Verbindung
+        settings: Einstellungen
+      fields:
+        baseUrl:
+          label: URL de l'API
+          description: URL vers le TESSA api
+        uiUrl:
+          label: TESSA URL
+          description: Url à l'application TESSA
+        useHttpInternally:
+          label: HTTP pour la communication interne
+          description: UUtiliser HTTP pour la communication interne entre Akeneo et Tessa
+        userName:
+          label: Nom d’utilisateur
+          description: TESSA nom d'utilisateur pour l'accès à l'API
+        apiKey:
+          label: Clé API
+          description: tessa ™ api key pour l'accès à l'API
+        systemIdentifier:
+          label: Identifiant du système TESSA
+          description: identifiant système TESSA
+        disableAssetEditingInAkeneoUi:
+          label: Désactiver l'édition des actifs dans l'interface utilisateur d'Akeneo
+          description: Désactive l'édition des actifs dans l'interface utilisateur Akeneo. Les actifs ne peuvent être édités que via la boîte de dialogue des actifs.
+        enableReferenceEntityTessaMainImage:
+          label: Activer les actifs Tessa comme image principale pour les entités de référence
+          description: Permet la création d'un attribut d'actif Tessa pour les nouvelles entités de référence (Enterprise Edition) au lieu d'un attribut d'actif Akeneo.
+      messages:
+        saveSuccessful: Les paramètres ont été mis à jour avec succès
+        saveFailed: Les paramètres n'ont pas pu être mis à jour
+
+tessa:
+  asset management:
+    title: Gestion des actifs TESSA
+    confirm: Enregistrer
+    cancel: Annuler
+    asset: Actif
+    assets: Actifs
+    choose: Gérer les actifs
+    choosen: Sélectionné
+    mark_removable: Sélectionner pour suppression
+    unmark_removable: Annuler supression

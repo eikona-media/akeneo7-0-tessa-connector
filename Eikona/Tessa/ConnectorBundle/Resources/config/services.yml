@@ -1,0 +1,45 @@
+services:
+    eikona.tessa:
+        class: 'Eikona\Tessa\ConnectorBundle\Tessa'
+        arguments:
+            - '@oro_config.global'
+            - '@kernel'
+            - '@logger'
+
+    eikona.utilities.math:
+        class: Eikona\Tessa\ConnectorBundle\Utilities\Math
+
+    eikona.utilities.link_generator:
+        class: Eikona\Tessa\ConnectorBundle\Utilities\LinkGenerator
+        arguments:
+            - '@eikona.tessa.auth_guard'
+            - '@eikona.tessa'
+            - '@pim_catalog.repository.cached_attribute'
+
+    eikona.utilities.link_parser:
+        class: Eikona\Tessa\ConnectorBundle\Utilities\LinkParser
+        arguments:
+            - '@pim_catalog.repository.cached_attribute'
+
+    eikona.tessa.connector.provider.field.mam:
+        class: Eikona\Tessa\ConnectorBundle\Enrich\Provider\Field\MamFieldProvider
+        tags:
+            - { name: pim_enrich.provider.field, priority: 90 }
+
+    eikona.tessa.auth_guard:
+        class: 'Eikona\Tessa\ConnectorBundle\Security\AuthGuard'
+        arguments:
+            - '@eikona.tessa'
+            - '@eikona.utilities.math'
+            - '@logger'
+
+    eikona.tessa.security.event_listener.add_csp:
+        class: Eikona\Tessa\ConnectorBundle\EventListener\AddContentSecurityPolicyListener
+        arguments:
+            - '@eikona.tessa'
+        tags:
+            - { name: kernel.event_subscriber, priority: -1 }
+
+    Eikona\Tessa\ConnectorBundle\Product\Domain\UserIntent\Factory\Value\TessaValueUserIntentFactory:
+        tags:
+            - { name: 'pim.enrichment.product.value_user_intent_factory' }

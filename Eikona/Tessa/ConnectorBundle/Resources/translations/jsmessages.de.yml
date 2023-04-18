@@ -1,0 +1,76 @@
+pim_enrich.entity.attribute.property.type.eikona_catalog_tessa: 'TESSA CONNECT'
+pim_title.eikona_tessa_connector: Tessa Konnektor
+pim_title.eikona_tessa_connector_info: Tessa Connector - Informationen
+pim_title.eikona_tessa_connector_settings: Tessa Connector - Einstellungen
+
+eikona:
+  tessa:
+
+    # Navigation
+    menu:
+      tessa: Tessa Konnektor
+      info: Informationen
+      settings: Einstellungen
+
+    # Info page
+    info:
+      name: EIKONA Akeneo TESSA Connector
+      version: Version
+      gotoTessaButtonLabel: Tessa öffnen
+
+    # Settings page
+    settings:
+      sections:
+        connection: Verbindung
+        settings: Einstellungen
+      fields:
+        baseUrl:
+          label: API-URL
+          description: Url der TESSA API
+        uiUrl:
+          label: Tessa-URL
+          description: URL der TESSA Anwendung
+        useHttpInternally:
+          label: HTTP für interne Kommunikation
+          description: Verwende HTTP für die interne Kommunikation zwischen Akeneo und Tessa
+        userName:
+          label: Benutzername
+          description: TESSA Benutzername für den API Zugriff
+        apiKey:
+          label: API Schlüssel
+          description: TESSA API Schlüssel für den API Zugriff
+        systemIdentifier:
+          label: TESSA System Kennung
+          description: TESSA System Kennung
+        disableAssetEditingInAkeneoUi:
+          label: Bearbeitung von Assets in Akeneo UI deaktivieren
+          description: Deaktiviert die Bearbeitung von Assets in der Akeneo UI. Assets können nur noch über den Asset-Dialog editiert werden.
+        enableReferenceEntityTessaMainImage:
+          label: Tessa assets als Hauptbild für Referenz-Entitäten aktivieren
+          description: Aktiviert die Erstellung eines Tessa Assets als Hauptbild für neue Referenz-Entitäten (Enterprise Edition) statt einem Akeneo-Asset.
+      messages:
+        saveSuccessful: Einstellungen erfolgreich gespeichert
+        saveFailed: Die Einstellungen konnten nicht gespeichert werden
+
+tessa:
+  asset management:
+    title: TESSA Asset Management
+    confirm: Speichern
+    cancel: Abbrechen
+    asset: Asset
+    assets: Assets
+    choose: Assets verwalten
+    choosen: ausgewählt
+    remove: Entfernen
+    mark_removable: Zum Entfernen vormerken
+    unmark_removable: Nicht mehr entfernen
+  attribute:
+      max_assets:
+          label: Maximale Assets
+      tessa_export_url:
+          label: Export Url
+      max_displayed_assets:
+          label: Maximal angezeigte Assets im Grid
+  datagrid:
+    cell:
+      assets: "{{ count }} Asset|{{ count }} Assets"

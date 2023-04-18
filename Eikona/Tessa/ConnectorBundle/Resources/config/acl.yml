@@ -1,0 +1,8 @@
+eikona_tessa_connector_info:
+  type: action
+  label: eikona.tessa.acl.info
+  group_name: eikona.tessa.acl.group
+eikona_tessa_connector_settings:
+  type: action
+  label: eikona.tessa.acl.settings
+  group_name: eikona.tessa.acl.group

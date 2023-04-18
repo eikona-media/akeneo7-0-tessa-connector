@@ -1,0 +1,25 @@
+services:
+  eikona.media.tessa.referencedataattribute.infrastructure.persistence.record.transformer.tessa_connector_value:
+    class: Eikona\Tessa\ReferenceDataAttributeBundle\Record\TessaValueTransformer
+    arguments:
+      - '@eikona.utilities.link_generator'
+    tags:
+      - { name: akeneo_referenceentity.connector_value_transformer }
+
+  # Overwrite original service
+  akeneo_referenceentity.infrastructure.persistence.record.hydrator.record_details:
+    class: Eikona\Tessa\ReferenceDataAttributeBundle\back\Infrastructure\Persistence\Sql\Record\Hydrator\RecordDetailsHydrator
+    arguments:
+      - '@database_connection'
+      - '@akeneo_referenceentity.infrastructure.persistence.record.hydrator.value'
+      - '@eikona.tessa'
+
+  # Overwrite original service
+  akeneo_referenceentity.infrastructure.persistence.record.hydrator.record_item:
+    class: Eikona\Tessa\ReferenceDataAttributeBundle\back\Infrastructure\Persistence\Sql\Record\Hydrator\RecordItemHydrator
+    arguments:
+      - '@database_connection'
+      - '@akeneo_referenceentity.infrastructure.persistence.query.find_required_value_key_collection_for_channel_and_locales'
+      - '@akeneo_referenceentity.infrastructure.persistence.query.find_attributes_indexed_by_identifier'
+      - '@akeneo_referenceentity.infrastructure.persistence.record.hydrator.record_item_value_hydrator_registry'
+      - '@eikona.tessa'
