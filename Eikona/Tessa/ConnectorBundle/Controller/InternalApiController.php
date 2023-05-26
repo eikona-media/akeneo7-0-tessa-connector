@@ -24,7 +24,7 @@ class InternalApiController
         $this->denyAccessUnlessAclIsGranted('eikona_tessa_connector_info');
 
         return new JsonResponse([
-            'version' => '1.0.0',
+            'version' => '1.0.1',
             'tessaLink' => $this->tessa->getUiUrl() ?: null,
         ]);
     }
