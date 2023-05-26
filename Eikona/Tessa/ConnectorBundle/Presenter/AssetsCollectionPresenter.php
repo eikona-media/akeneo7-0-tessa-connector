@@ -61,23 +61,6 @@ class AssetsCollectionPresenter implements PresenterInterface
             return null;
         }
 
-        $result = '';
-
-        $assets = explode(',', $assetCodes);
-
-        foreach ($assets as $asset) {
-            /** @noinspection CssUnknownTarget */
-            $result .= sprintf(
-                '<div class="AknThumbnail EikonAssetThumbnail" style="background-image: url(\'%s\')">' .
-                '<span class="AknThumbnail-label">%s</span>' .
-                '</div>',
-                $this->router->generate('eikona_tessa_media_preview', [
-                    'assetId' => $asset
-                ]),
-                $asset
-            );
-        }
-
-        return $result;
+        return explode(',', $assetCodes);
     }
 }

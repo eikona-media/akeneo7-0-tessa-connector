@@ -36,3 +36,6 @@ config:
           module: eikona/tessa/connector/controller/info
         eikona_tessa_connector_settings:
           module: eikona/tessa/connector/controller/settings
+    akeneopimworkflow/js/datagrid/cell/proposal-cell:
+      proposal_diffs:
+        eikona_catalog_tessa: '@eikonatessaconnector/js/datagrid/cell/ProposalDiff/ProposalDiffTessa'
